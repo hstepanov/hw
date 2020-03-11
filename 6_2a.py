@@ -1,14 +1,15 @@
 #!/usr/bin/env python3
 ip_addr = input('Input ip address :')
 try:
-    first_octet = int(ip_addr.split('.')[0])
-    second_octet = int(ip_addr.split('.')[1])
-    third_octet = int(ip_addr.split('.')[2])
-    fourth_octet = int(ip_addr.split('.')[3])
+    first_octet = ip_addr.split('.')[0]
+    second_octet = ip_addr.split('.')[1]
+    third_octet = ip_addr.split('.')[2]
+    fourth_octet = ip_addr.split('.')[3]
     octets_list = [first_octet, second_octet, third_octet, fourth_octet]
+    print(octets_list)
     for octet in octets_list:
         if not str(octet).isdigit():
-            print('Ip address is not correct')
+            print('OK')
 
     if 1 < int(first_octet) and int(first_octet) < 223:
         print("Unicast")
@@ -20,8 +21,11 @@ try:
         print("Unassigned")
     else:
         print("Unused")
-except ValueError:
-    print('you input letters')
+
+except IndexError:
+    if ip_addr.isalpha():
+        print('Ip address contains letters')
+
 
 #for octet in octets_list:
 #    if not str(octet).isdigit():
