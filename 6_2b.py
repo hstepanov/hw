@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# script waits for ip address input. if it's incorrect, script promt is again
 while True:
     try:
         ip_addr = input('Input ip address :').split('.')
