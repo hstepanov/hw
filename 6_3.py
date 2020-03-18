@@ -1,12 +1,14 @@
 #!/usr/bin/env python3
 access_template = [
-        'switchport mode access', 'switchport access vlan',
-        'spanning-tree portfast', 'spanning-tree bpduguard enable'
-        ]
+    'switchport mode access', 'switchport access vlan',
+    'spanning-tree portfast', 'spanning-tree bpduguard enable'
+]
+
 trunk_template = [
-        'switchport trunk encapsulation dot1q', 
-        'switchport mode trunk', 'switchport trunk allowed vlan'
-        ]
+    'switchport trunk encapsulation dot1q', 'switchport mode trunk',
+    'switchport trunk allowed vlan'
+]
+
 access = {
     '0/12': '10',
     '0/14': '11',
@@ -19,10 +21,22 @@ trunk = {
         '0/4': ['del', '17']
     }
 
-for intf, vlan in access.items():
+#for intf, vlan in access.items():
+#    print('interface FastEthernet' + intf)
+#    for command in access_template:
+#        if command.endswith('access vlan'):
+#            print(' {} {}'.format(command, vlan))
+#        else:
+#            print(' {}'.format(command))
+for intf, value in trunk.items():
     print('interface FastEthernet' + intf)
-    for command in access_template:
-        if command.endswith('access vlan'):
-            print(' {} {}'.format(command, vlan))
+    for command in trunk_template:
+        if 'add' in value:
+            print('add')
+        elif 'only' in value:
+            print('only')
+        elif 'del' in value:
+            print('del')
         else:
             print(' {}'.format(command))
+    #    print(intf, '-->', value)
