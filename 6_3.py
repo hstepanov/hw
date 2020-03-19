@@ -32,10 +32,10 @@ for intf, value in trunk.items():
     print('interface FastEthernet' + intf)
     for command in trunk_template:
         if 'add' in value and 'allowed' in command:
-            print(' {} {}'.format(command, ' '.join([str(x) for x in value])))
+            print(' {} {}'.format(command, ','.join([str(x) for x in value])))
 
         elif 'only' in value and 'allowed' in command:
-            print(' {} {}'.format(command, ' '.join([str(x) for x in value[1:]])))
+            print(' {} {}'.format(command, ','.join([str(x) for x in value[1:]])))
 
         elif 'del' in value and 'allowed' in command:
             print(' {} {}'.format(command, str(value[-1])))
