@@ -20,25 +20,24 @@ trunk = {
         '0/2': ['only', '11', '30'],
         '0/4': ['del', '17']
     }
-
-#for intf, vlan in access.items():
-#    print('interface FastEthernet' + intf)
-#    for command in access_template:
-#        if command.endswith('access vlan'):
-#            print(' {} {}'.format(command, vlan))
-#        else:
-#            print(' {}'.format(command))
+# Access ports section
+for intf, vlan in access.items():
+    print('interface FastEthernet' + intf)
+    for command in access_template:
+        if command.endswith('access vlan'):
+            print(' {} {}'.format(command, vlan))
+        else:
+            print(' {}'.format(command))
+# Trunk ports section
 for intf, value in trunk.items():
     print('interface FastEthernet' + intf)
     for command in trunk_template:
         if 'add' in value and 'allowed' in command:
-            print(' {} {}'.format(command, ','.join([str(x) for x in value])))
-
+            print(' {}'.format(command), value[0], ','.join([str(x) for x in value[1:]]))
         elif 'only' in value and 'allowed' in command:
             print(' {} {}'.format(command, ','.join([str(x) for x in value[1:]])))
 
         elif 'del' in value and 'allowed' in command:
-            print(' {} {}'.format(command, str(value[-1])))
+            print(' {}'.format(command), 'remove', str(value[-1]))
         else:
             print(' {}'.format(command))
-#    #    print(intf, '-->', value)
