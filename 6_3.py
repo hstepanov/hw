@@ -31,12 +31,14 @@ trunk = {
 for intf, value in trunk.items():
     print('interface FastEthernet' + intf)
     for command in trunk_template:
-        if 'add' in value:
-            print('add')
-        elif 'only' in value:
-            print('only')
-        elif 'del' in value:
-            print('del')
-        else:
-            print(' {}'.format(command))
-    #    print(intf, '-->', value)
+        if 'add' in value and 'allowed' in command:
+            print('{}'.format(command) + value)
+
+        elif 'only' in value and 'allowed' in command:
+            print('{}'.format(command))
+
+        elif 'del' in value and 'allowed' in command:
+            print('{}'.format(command))
+#        else:
+#            print(' {}'.format(command))
+#    #    print(intf, '-->', value)
