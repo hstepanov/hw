@@ -13,9 +13,8 @@ with open(inp_file, 'r') as inp_fl:
         
 #        print(line.replace('DYNAMIC','')) if 'DYNAMIC' in line else pass
 for item in res_lst:
-    xres_lst.append((item[:4],item[7:]))
-print(xres_lst)
+    xres_lst.append((item[-5:],item[:-5]))
 res_dict = dict(xres_lst)
-for key in sorted(res_dict):
-    print(key, res_dict[key])
+for key,value in sorted(res_dict.items()):
+    print(value, key)
 #print(res_lst.sort(), sep = "\n")
