@@ -14,6 +14,9 @@ with open(inp_file, 'r') as inp_fl:
             res_lst.append(x.split(' '))
 
 for item in res_lst:
+    item[0] = int(item[0])
+res_lst.sort()
+for item in res_lst:
     print(item)
 #        print(line.lstrip(' ').strip('\n').replace('DYNAMIC','')) if 'DYNAMIC' in line else ''
         
