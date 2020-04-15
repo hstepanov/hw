@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# script read data from cam_table.txt and print sorted data by vlan-number
+# script read data from stdin (cam_table.txt and vlan number), sort data by vlan-number and print it
 from sys import argv
 inp_file = argv[1]
 inp_vlan = int(argv[2])
