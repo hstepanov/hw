@@ -17,11 +17,6 @@ access_config = {
     'FastEthernet0/16': 17
 }
 
-if len(port_security_template) > 0:
-    print('OK')
-else:
-    print('NOT OK')
-
 def gen_config(access_mode_template, access_config, *args):
     config = []
     for intf, vlan in access_config.items():
@@ -31,12 +26,12 @@ def gen_config(access_mode_template, access_config, *args):
                 config.append(print(command, vlan))
             else:
                 config.append(print(command))
-        for command in port_security_template:
-            config.append(print(command))
-#        if len(port_security_template) > 0:
-#            print('OK')
-#        else:
-#            print('NOT OK')
+        if len(args) != 0:
+            for command in args:
+                for comm in command:
+                    config.append(print(comm))
+        else:
+            pass
     return config
-gen_config(access_mode_template, access_config)
-#        port_security_template)
+
+gen_config(access_mode_template, access_config, port_security_template)
