@@ -9,15 +9,13 @@ trunk_config = {
     'FastEthernet0/2': [11, 30],
     'FastEthernet0/4': [17]
 }
-for port, vlan in trunk_config.items():
-    print([vlan for vlan in trunk_config[port]])
 
 def conf_gen(trunk_mode_template, trunk_config):
     for port, vlan in trunk_config.items():
         print('interface', port)
         for command in trunk_mode_template:
             if command.endswith('vlan'):
-                print(command, [str(vl) for vl in vlan])
+                print(command, ','.join(map(str, vlan)))
             else:
                 print(command)
 conf_gen(trunk_mode_template, trunk_config)
