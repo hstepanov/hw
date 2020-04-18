@@ -11,11 +11,13 @@ trunk_config = {
 }
 
 def conf_gen(trunk_mode_template, trunk_config):
+    result = []
     for port, vlan in trunk_config.items():
-        print('interface', port)
+        result.append('{} {}'.format('interface',port))
         for command in trunk_mode_template:
             if command.endswith('vlan'):
-                print(command, ','.join(map(str, vlan)))
+                result.append('{} {}'.format(command,','.join(map(str,vlan))))
             else:
-                print(command)
+                result.append(command)
+    return print(result)
 conf_gen(trunk_mode_template, trunk_config)
