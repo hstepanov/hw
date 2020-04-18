@@ -12,13 +12,25 @@ trunk_config = {
 
 def conf_gen(trunk_mode_template, trunk_config):
     ports_list = []
-    commands_list = []
-    for port, vlan in trunk_config.items():
+    for port in trunk_config:
         ports_list.append(port)
-        for command in trunk_mode_template:
-            if command.endswith('vlan'):
-                commands_list.append('{} {}'.format(command,','.join(map(str,vlan))))
-            else:
-                commands_list.append(command)
-    return print(commands_list, ports_list)
+    result_dict = dict.fromkeys(ports_list, [])
+
+    for prt,commands in result_dict.items():
+        for port,vlan in trunk_config.items():
+            commands_list = []
+            for command in trunk_mode_template:
+                if command.endswith('vlan'):
+                    commands_list.append('{} {}'.format(command,','.join(map(str,vlan))))
+                else:
+                    commands_list.append(command)
+            commands = commands_list
+#    for port, vlan in trunk_config.items():
+#        ports_list.append(port)
+#        for command in trunk_mode_template:
+#            if command.endswith('vlan'):
+#                commands_list.append('{} {}'.format(command,','.join(map(str,vlan))))
+#            else:
+#                commands_list.append(command)
+    return print(result_dict)
 conf_gen(trunk_mode_template, trunk_config)
